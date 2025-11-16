@@ -28,4 +28,17 @@ Entry point for every program.
 
 This is the function that is executed whenever the localhost:8080 is visited.
 w = where we write the HTTP response
-r = information
+r = information about the incoming request
+
+## fmt.Fprintf(w, "Current time: %s", time.Now().Format(time.RFC1123))
+
+time.Now() → gets the exact current date/time
+.Format(time.RFC1123) → converts it to a standard readable format
+Example: Mon, 16 Nov 2025 21:32:45 CET
+
+## http.ListenAndServe(":8080", nil)
+
+Start the web server on port 8080
+":8080" → listen on all network interfaces (localhost + network)
+nil → use the default router (the one we configured above)
+This line blocks forever – server keeps running until you press Ctrl+C
