@@ -7,7 +7,11 @@ import (
 )
 
 func main() {
+
+	message := "..."
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Current time: %s %s\n", time.Now().Format(time.RFC1123), message)
 		fmt.Fprintf(w, "Current time: %s", time.Now().Format(time.RFC1123))
 	})
 
@@ -28,5 +32,6 @@ func main() {
 
 
 	http.ListenAndServe(":8080", nil)
+
 }
 
