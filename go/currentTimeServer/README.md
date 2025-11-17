@@ -42,3 +42,11 @@ Start the web server on port 8080
 ":8080" → listen on all network interfaces (localhost + network)
 nil → use the default router (the one we configured above)
 This line blocks forever – server keeps running until you press Ctrl+C
+
+///
+
+# os
+
+# html template
+
+https://pkg.go.dev/html/template

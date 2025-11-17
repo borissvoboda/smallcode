@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -29,6 +31,20 @@ func main() {
             fmt.Fprintf(w, "GET")
         }
     })
+
+	// serve static html file
+	http.HandleFunc("/in", func(w http.ResponseWriter, r *http.Request) {
+        html, _ := os.ReadFile("index.html")
+        w.Header().Set("Content-Type", "text/html")
+        w.Write(html)
+    })
+
+	var tmpl = template.Must(template.ParseGlob("inj.html"))
+
+	http.HandleFunc("/inj", func(w http.ResponseWriter, r *http.Request) {
+    data := struct{ Name string }{Name: "My name"}  
+    tmpl.ExecuteTemplate(w, "inj.html", data)
+})
 
 
 	http.ListenAndServe(":8080", nil)
